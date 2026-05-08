@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ofertas | Unielectronica</title>
+    <link rel="icon" type="image/png" href="../Img/favicon-unielectronica.png" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="preloader" id="preloader" aria-label="Cargando Unielectronica">
+      <div class="preloader-card">
+        <img src="../Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        <span></span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="top-bar">
+        <a class="brand" href="../index.html#inicio" aria-label="Ir al inicio">
+          <img class="brand-logo" src="../Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        </a>
+        <nav class="nav" id="mainNav">
+          <a href="../index.html#inicio" class="nav-link">Inicio</a>
+          <a href="tienda.html" class="nav-link">Tienda</a>
+          <a href="ofertas.html" class="nav-link active">Ofertas</a>
+          <a href="nosotros.html" class="nav-link">Nosotros</a>
+          <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-icon icon-search" id="searchBtn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21"></path>
+            </svg>
+          </button>
+          <button class="btn-icon cart-btn icon-cart" aria-label="Carrito">
+            <img src="../Img/cart-icon.svg" alt="" aria-hidden="true" />
+            <span id="cartCount">0</span>
+          </button>
+          <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><span></span></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-panel" id="searchPanel" aria-hidden="true">
+      <div class="search-box" role="search">
+        <label for="productSearch">Buscar en Unielectronica</label>
+        <div class="search-row">
+          <input id="productSearch" type="search" placeholder="Ofertas, impresoras, toners, computadores..." autocomplete="off" />
+          <button class="btn-primary" id="closeSearch" type="button">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="offers-page">
+      <section class="offers-hero">
+        <div class="offers-hero-copy">
+          <div class="breadcrumb">
+            <a href="../index.html#inicio">Inicio</a>
+            <span>/</span>
+            <strong>Ofertas</strong>
+          </div>
+          <p class="eyebrow">Promociones activas</p>
+          <h1>Ofertas Unielectronica</h1>
+          <p>Seis espacios destacados para promociones de temporada, equipos listos para entrega y combos para hogar, oficina o negocio.</p>
+          <div class="offers-hero-actions">
+            <a class="btn-primary" href="#ofertas-destacadas">Ver ofertas</a>
+            <a class="btn-ghost" href="https://wa.me/573157001313" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          </div>
+        </div>
+        <div class="offers-hero-panel" aria-hidden="true">
+          <span>Hasta</span>
+          <strong>30%</strong>
+          <p>en seleccionados</p>
+          <div class="offers-hero-product"></div>
+        </div>
+      </section>
+
+      <section class="offers-carousel-section" id="ofertas-destacadas" aria-label="Ofertas destacadas">
+        <div class="section-header">
+          <h2>Ofertas destacadas</h2>
+          <p>Usa estos 6 espacios para publicar tus promociones principales.</p>
+        </div>
+
+        <div class="offers-carousel">
+          <button class="carousel-btn offers-prev" id="prevOffer" type="button" aria-label="Oferta anterior">
+            <img src="../Img/slide2-icon.svg" alt="" aria-hidden="true" />
+          </button>
+          <div class="offers-viewport">
+            <div class="offers-track" id="offersTrack">
+              <article class="offer-slide product-card shop-product-card active" data-product="impresora multifuncional oficina oferta empresarial">
+                <span class="product-badge">-18%</span>
+                <div class="shop-product-media shop-product-printer-office"></div>
+                <div class="offer-copy">
+                  <p class="feature-label">Espacio 01</p>
+                  <h3>Impresora Multifuncional Oficina</h3>
+                  <p class="price">$1.899.900 <span>$2.199.900</span></p>
+                  <p class="rating">***** <span>(128)</span></p>
+                  <button class="add-cart" type="button">Agregar</button>
+                </div>
+              </article>
+
+              <article class="offer-slide product-card shop-product-card" data-product="impresora hogar tinta oferta documentos">
+                <span class="product-badge">Combo</span>
+                <div class="shop-product-media shop-product-printer-home"></div>
+                <div class="offer-copy">
+                  <p class="feature-label">Espacio 02</p>
+                  <h3>Impresora para Hogar + Tinta</h3>
+                  <p class="price">$749.900 <span>$829.900</span></p>
+                  <p class="rating">***** <span>(96)</span></p>
+                  <button class="add-cart" type="button">Agregar</button>
+                </div>
+              </article>
+
+              <article class="offer-slide product-card shop-product-card" data-product="computador portatil hogar oferta estudio trabajo">
+                <span class="product-badge">-12%</span>
+                <div class="shop-product-media shop-product-laptop"></div>
+                <div class="offer-copy">
+                  <p class="feature-label">Espacio 03</p>
+                  <h3>Computador Portatil Hogar</h3>
+                  <p class="price">$2.199.900 <span>$2.499.900</span></p>
+                  <p class="rating">***** <span>(74)</span></p>
+                  <button class="add-cart" type="button">Agregar</button>
+                </div>
+              </article>
+
+              <article class="offer-slide product-card shop-product-card" data-product="lector codigo barras qr oferta punto venta">
+                <span class="product-badge">POS</span>
+                <div class="shop-product-media shop-product-reader"></div>
+                <div class="offer-copy">
+                  <p class="feature-label">Espacio 04</p>
+                  <h3>Lector Codigos, QR y Huellas</h3>
+                  <p class="price">$349.900 <span>$399.900</span></p>
+                  <p class="rating">***** <span>(210)</span></p>
+                  <button class="add-cart" type="button">Agregar</button>
+                </div>
+              </article>
+
+              <article class="offer-slide product-card shop-product-card" data-product="impresora etiquetas oferta codigo barras envios">
+                <span class="product-badge">-19%</span>
+                <div class="shop-product-media shop-product-label"></div>
+                <div class="offer-copy">
+                  <p class="feature-label">Espacio 05</p>
+                  <h3>Impresora de Etiquetas</h3>
+                  <p class="price">$689.900 <span>$849.900</span></p>
+                  <p class="rating">***** <span>(156)</span></p>
+                  <button class="add-cart" type="button">Agregar</button>
+                </div>
+              </article>
+
+              <article class="offer-slide product-card shop-product-card" data-product="toner tintas suministros oficina oferta">
+                <span class="product-badge">Suministros</span>
+                <div class="shop-product-media shop-product-toner"></div>
+                <div class="offer-copy">
+                  <p class="feature-label">Espacio 06</p>
+                  <h3>Toner Laser Alto Rendimiento</h3>
+                  <p class="price">$259.900 <span>$299.900</span></p>
+                  <p class="rating">***** <span>(43)</span></p>
+                  <button class="add-cart" type="button">Agregar</button>
+                </div>
+              </article>
+            </div>
+          </div>
+          <button class="carousel-btn offers-next" id="nextOffer" type="button" aria-label="Oferta siguiente">
+            <img src="../Img/slide1-icon.svg" alt="" aria-hidden="true" />
+          </button>
+        </div>
+
+        <div class="carousel-dots offers-dots" aria-label="Seleccionar oferta">
+          <button class="carousel-dot active" type="button" aria-label="Oferta 1"></button>
+          <button class="carousel-dot" type="button" aria-label="Oferta 2"></button>
+          <button class="carousel-dot" type="button" aria-label="Oferta 3"></button>
+          <button class="carousel-dot" type="button" aria-label="Oferta 4"></button>
+          <button class="carousel-dot" type="button" aria-label="Oferta 5"></button>
+          <button class="carousel-dot" type="button" aria-label="Oferta 6"></button>
+        </div>
+      </section>
+
+      <section class="offers-benefits">
+        <article>
+          <span>%</span>
+          <h3>Precios de temporada</h3>
+          <p>Promociones pensadas para renovar equipos sin salirse del presupuesto.</p>
+        </article>
+        <article>
+          <span>24h</span>
+          <h3>Cotizacion rapida</h3>
+          <p>Agrega productos al carrito y envia tu solicitud por WhatsApp.</p>
+        </article>
+        <article>
+          <span>CO</span>
+          <h3>Atencion local</h3>
+          <p>Acompanamiento para hogares, oficinas, comercios y empresas.</p>
+        </article>
+      </section>
+
+      <section class="offers-grid-section">
+        <div class="section-header">
+          <h2>Tambien puede interesarte</h2>
+          <p>Combos y categorias que suelen complementar las ofertas destacadas.</p>
+        </div>
+        <div class="offers-mini-grid">
+          <a href="tienda.html" class="offer-mini-card">
+            <img src="../Img/printer-icon.svg" alt="" />
+            <span>Impresoras</span>
+          </a>
+          <a href="tienda.html" class="offer-mini-card">
+            <img src="../Img/laptop-icon.svg" alt="" />
+            <span>Computadores</span>
+          </a>
+          <a href="tienda.html" class="offer-mini-card">
+            <img src="../Img/cables-icon.svg" alt="" />
+            <span>Cables y accesorios</span>
+          </a>
+          <a href="tienda.html" class="offer-mini-card">
+            <img src="../Img/tools-icon.svg" alt="" />
+            <span>Herramientas</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-tab">Mas informacion</div>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Contactanos</h3>
+          <a href="tel:+573054829046">Ventas WhatsApp<br />(+57) 305 482 90 46</a>
+          <a href="mailto:ventas@unielectronica.com">ventas@unielectronica.com</a>
+          <span>Cali: San Nicolas</span>
+          <span>Bogota: Centro tecnologico/comercial</span>
+        </div>
+        <div class="footer-column">
+          <h3>Centro de ayuda</h3>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="#">Garantias y cambios</a>
+          <a href="#">Metodos de pago</a>
+        </div>
+        <div class="footer-column">
+          <h3>Soluciones</h3>
+          <a href="tienda.html">Impresoras</a>
+          <a href="tienda.html">Computo</a>
+          <a href="tienda.html">Audio y Video</a>
+          <a href="tienda.html#electronica">Tecnologia y electronica</a>
+          <a href="tienda.html">Herramientas</a>
+        </div>
+        <div class="footer-column">
+          <h3>Nuestra compania</h3>
+          <a href="nosotros.html">Quienes somos</a>
+          <a href="#">Ventas empresariales</a>
+          <a href="#">Soporte tecnico</a>
+          <a href="#">Puntos de entrega</a>
+        </div>
+        <div class="footer-column">
+          <h3>Informacion legal</h3>
+          <a href="#">Terminos y condiciones</a>
+          <a href="#">Politicas de privacidad</a>
+          <a href="#">Tratamiento de datos</a>
+          <a href="#">Politica de garantias</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Unielectronica</p>
+        <span>2026 Unielectronica. Tecnologia, impresion y ofertas para clientes reales.</span>
+      </div>
+    </footer>
+
+    <a class="whatsapp-float" href="https://wa.me/573157001313" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+      <span>WhatsApp</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3.5a8.4 8.4 0 0 0-7.25 12.64L4 20.5l4.45-1.17A8.4 8.4 0 1 0 12 3.5Z"></path>
+        <path d="M8.8 8.2c.2-.42.42-.43.62-.43h.5c.16 0 .38.06.58.48.22.52.72 1.77.78 1.9.06.13.1.29.02.46-.08.18-.13.29-.27.45-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.68 1.12 1.46 1.8 1 .9 1.84 1.18 2.1 1.31.26.13.42.11.57-.06.16-.18.66-.77.84-1.04.18-.26.35-.22.59-.13.24.08 1.52.72 1.78.85.26.13.43.19.5.3.06.11.06.64-.15 1.25-.21.6-1.23 1.18-1.72 1.22-.44.04-1 .06-1.62-.1-.37-.1-.85-.28-1.46-.54-2.56-1.1-4.23-3.67-4.36-3.84-.13-.18-1.04-1.38-1.04-2.63 0-1.25.66-1.86.9-2.12Z"></path>
+      </svg>
+    </a>
+
+    <script src="../app.js"></script>
+  </body>
+</html>

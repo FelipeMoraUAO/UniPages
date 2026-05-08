@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--
+      PAGINA DE DETALLE DE PRODUCTO
+      Esta pagina funciona como una ficha individual tipo ecommerce.
+      app.js lee el parametro de URL ?producto=... y llena automaticamente nombre, precio,
+      ITEM, descripcion, caracteristicas, imagenes y enlaces de WhatsApp.
+
+      IMPORTANTE PARA FUTURAS MODIFICACIONES:
+      Mantener estos comentarios de guia para que sea facil ubicar cada seccion.
+    -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Producto | Unielectronica</title>
+    <!-- Favicon de la pestana del navegador. -->
+    <link rel="icon" type="image/png" href="../Img/favicon-unielectronica.png" />
+    <!-- Hoja de estilos global del sitio. -->
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <!-- Preloader inicial: se oculta desde app.js. -->
+    <div class="preloader" id="preloader" aria-label="Cargando Unielectronica">
+      <div class="preloader-card">
+        <img src="../Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Header fijo: logo, menu principal, buscador, carrito y menu movil. -->
+    <header class="site-header">
+      <div class="top-bar">
+        <!-- Logo que vuelve al inicio del home. -->
+        <a class="brand" href="../index.html#inicio" aria-label="Ir al inicio">
+          <img class="brand-logo" src="../Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        </a>
+        <!-- Navegacion principal. Tienda queda activa porque esta es una pagina de producto. -->
+        <nav class="nav" id="mainNav">
+          <a href="../index.html#inicio" class="nav-link">Inicio</a>
+          <a href="tienda.html" class="nav-link active">Tienda</a>
+          <a href="ofertas.html" class="nav-link">Ofertas</a>
+          <a href="nosotros.html" class="nav-link">Nosotros</a>
+          <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <!-- Boton que abre el panel de busqueda. -->
+          <button class="btn-icon icon-search" id="searchBtn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21"></path>
+            </svg>
+          </button>
+          <!-- Boton del carrito. El numero se actualiza desde app.js. -->
+          <button class="btn-icon cart-btn icon-cart" aria-label="Carrito">
+            <img src="../Img/cart-icon.svg" alt="" aria-hidden="true" />
+            <span id="cartCount">0</span>
+          </button>
+          <!-- Boton hamburguesa para pantallas pequenas. -->
+          <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><span></span></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Panel de busqueda desplegable. app.js lo abre y filtra productos cuando existen tarjetas en la pagina. -->
+    <div class="search-panel" id="searchPanel" aria-hidden="true">
+      <div class="search-box" role="search">
+        <label for="productSearch">Buscar en Unielectronica</label>
+        <div class="search-row">
+          <input id="productSearch" type="search" placeholder="Impresoras, computadores, cables..." autocomplete="off" />
+          <button class="btn-primary" id="closeSearch" type="button">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor principal de la ficha de producto. app.js inyecta los datos dentro de los IDs. -->
+    <main class="product-detail-page">
+      <!-- Migas de pan para volver al home o a la tienda. -->
+      <div class="breadcrumb">
+        <a href="../index.html#inicio">Inicio</a>
+        <span>/</span>
+        <a href="tienda.html">Tienda</a>
+        <span>/</span>
+        <strong>Producto</strong>
+      </div>
+
+      <!-- Bloque superior: imagenes a la izquierda e informacion/acciones a la derecha. -->
+      <section class="product-detail-layout">
+        <!-- Galeria del producto. La imagen principal y miniaturas se llenan desde app.js. -->
+        <div class="product-detail-media">
+          <div class="product-detail-main-image">
+            <div class="shop-product-media" id="productDetailMainImage" aria-hidden="true"></div>
+          </div>
+          <div class="product-detail-gallery" id="productDetailGallery" aria-label="Mas imagenes del producto"></div>
+        </div>
+
+        <!-- Informacion principal del producto. -->
+        <article class="product-detail-info">
+          <!-- Categoria comercial: Impresoras, Computo, Tecnologia y electronica, etc. -->
+          <span class="product-detail-category" id="productDetailCategory"></span>
+          <!-- ITEM del sistema interno para que vendedores ubiquen el producto. -->
+          <span class="product-detail-item" id="productDetailItem"></span>
+          <!-- Nombre del producto. -->
+          <h1 id="productDetailTitle"></h1>
+          <!-- Resumen corto de venta. -->
+          <p class="product-detail-summary" id="productDetailSummary"></p>
+          <!-- Precio actual y precio anterior opcional. -->
+          <div class="product-detail-price">
+            <strong id="productDetailPrice"></strong>
+            <span id="productDetailOldPrice"></span>
+          </div>
+          <!-- Acciones principales: carrito o compra directa por WhatsApp. -->
+          <div class="product-detail-actions">
+            <button class="btn-secondary" id="productDetailAdd" type="button">Agregar al carrito</button>
+            <a class="btn-primary" id="productDetailBuy" href="#" target="_blank" rel="noopener">Comprar por WhatsApp</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Bloque inferior: informacion ampliada para tomar decision de compra. -->
+      <section class="product-detail-extra">
+        <!-- Descripcion larga del producto. Se llena desde PRODUCT_DETAILS en app.js. -->
+        <article>
+          <h2>Descripcion</h2>
+          <p id="productDetailDescription"></p>
+        </article>
+        <!-- Lista de caracteristicas principales. Se llena desde PRODUCT_DETAILS en app.js. -->
+        <article>
+          <h2>Caracteristicas</h2>
+          <ul id="productDetailFeatures"></ul>
+        </article>
+      </section>
+    </main>
+
+    <!-- Footer de la pagina: contacto, ayuda, soluciones y datos legales. -->
+    <footer class="site-footer">
+      <div class="footer-tab">Mas informacion</div>
+      <div class="footer-content">
+        <!-- Columna de datos de contacto. -->
+        <div class="footer-column">
+          <h3>Contactanos</h3>
+          <a href="tel:+573054829046">Ventas WhatsApp<br />(+57) 305 482 90 46</a>
+          <a href="mailto:ventas@unielectronica.com">ventas@unielectronica.com</a>
+          <span>Cali: San Nicolas</span>
+          <span>Bogota: Centro tecnologico/comercial</span>
+        </div>
+        <!-- Enlaces de ayuda al cliente. -->
+        <div class="footer-column">
+          <h3>Centro de ayuda</h3>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="#">Garantias y cambios</a>
+          <a href="#">Metodos de pago</a>
+        </div>
+        <!-- Accesos rapidos a categorias de tienda. -->
+        <div class="footer-column">
+          <h3>Soluciones</h3>
+          <a href="tienda.html#impresoras">Impresoras</a>
+          <a href="tienda.html#computo">Computo</a>
+          <a href="tienda.html#audio-video">Audio y Video</a>
+          <a href="tienda.html#electronica">Tecnologia y electronica</a>
+          <a href="tienda.html#herramientas">Herramientas</a>
+        </div>
+        <!-- Enlaces institucionales. -->
+        <div class="footer-column">
+          <h3>Nuestra compania</h3>
+          <a href="nosotros.html">Quienes somos</a>
+          <a href="#">Ventas empresariales</a>
+          <a href="#">Soporte tecnico</a>
+          <a href="#">Puntos de entrega</a>
+        </div>
+        <!-- Enlaces legales. -->
+        <div class="footer-column">
+          <h3>Informacion legal</h3>
+          <a href="#">Terminos y condiciones</a>
+          <a href="#">Politicas de privacidad</a>
+          <a href="#">Tratamiento de datos</a>
+          <a href="#">Politica de garantias</a>
+        </div>
+      </div>
+      <!-- Franja inferior del footer. -->
+      <div class="footer-bottom">
+        <p>Unielectronica</p>
+        <span>2026 Unielectronica. Tecnologia, impresion y soporte para clientes reales.</span>
+      </div>
+    </footer>
+
+    <!-- Boton flotante de WhatsApp general. No depende del producto seleccionado. -->
+    <a class="whatsapp-float" href="https://wa.me/573157001313" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+      <span>WhatsApp</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3.5a8.4 8.4 0 0 0-7.25 12.64L4 20.5l4.45-1.17A8.4 8.4 0 1 0 12 3.5Z"></path>
+        <path d="M8.8 8.2c.2-.42.42-.43.62-.43h.5c.16 0 .38.06.58.48.22.52.72 1.77.78 1.9.06.13.1.29.02.46-.08.18-.13.29-.27.45-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.68 1.12 1.46 1.8 1 .9 1.84 1.18 2.1 1.31.26.13.42.11.57-.06.16-.18.66-.77.84-1.04.18-.26.35-.22.59-.13.24.08 1.52.72 1.78.85.26.13.43.19.5.3.06.11.06.64-.15 1.25-.21.6-1.23 1.18-1.72 1.22-.44.04-1 .06-1.62-.1-.37-.1-.85-.28-1.46-.54-2.56-1.1-4.23-3.67-4.36-3.84-.13-.18-1.04-1.38-1.04-2.63 0-1.25.66-1.86.9-2.12Z"></path>
+      </svg>
+    </a>
+
+    <!-- JavaScript global: llena esta pagina, maneja carrito, buscador, menu y WhatsApp. -->
+    <script src="../app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda | Unielectronica</title>
+    <link rel="icon" type="image/png" href="../Img/favicon-unielectronica.png" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="preloader" id="preloader" aria-label="Cargando Unielectronica">
+      <div class="preloader-card">
+        <img src="../Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        <span></span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="top-bar">
+        <a class="brand" href="../index.html#inicio" aria-label="Ir al inicio">
+          <img class="brand-logo" src="../Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        </a>
+        <nav class="nav" id="mainNav">
+          <a href="../index.html#inicio" class="nav-link">Inicio</a>
+          <a href="tienda.html" class="nav-link active">Tienda</a>
+          <a href="ofertas.html" class="nav-link">Ofertas</a>
+          <a href="nosotros.html" class="nav-link">Nosotros</a>
+          <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-icon icon-search" id="searchBtn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21"></path>
+            </svg>
+          </button>
+          <button class="btn-icon cart-btn icon-cart" aria-label="Carrito">
+            <img src="../Img/cart-icon.svg" alt="" aria-hidden="true" />
+            <span id="cartCount">0</span>
+          </button>
+          <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><span></span></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-panel" id="searchPanel" aria-hidden="true">
+      <div class="search-box" role="search">
+        <label for="productSearch">Buscar en Unielectronica</label>
+        <div class="search-row">
+          <input id="productSearch" type="search" placeholder="Impresoras, tintas, lectores, computadores..." autocomplete="off" />
+          <button class="btn-primary" id="closeSearch" type="button">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="shop-page">
+      <section class="shop-hero" aria-label="Tienda Unielectronica">
+        <div class="shop-hero-copy">
+          <div class="breadcrumb">
+            <a href="../index.html#inicio">Inicio</a>
+            <span>/</span>
+            <strong>Tienda</strong>
+          </div>
+          <p class="eyebrow">Tecnologia e impresion</p>
+          <h1>Tienda</h1>
+          <p>Descubre soluciones para hogar, oficina, punto de venta y empresas con atencion cercana.</p>
+        </div>
+        <div class="shop-hero-products" aria-hidden="true">
+          <div class="shop-hero-item shop-hero-printer"></div>
+          <div class="shop-hero-item shop-hero-computer"></div>
+          <div class="shop-hero-item shop-hero-reader"></div>
+        </div>
+      </section>
+
+      <!-- Catalogo principal de tienda: a la izquierda estan las categorias y a la derecha los productos. -->
+      <section class="shop-layout" aria-label="Catalogo de productos">
+        <aside class="shop-sidebar">
+          <h2>Categorias</h2>
+          <!--
+            Menu lateral de categorias.
+            Cada href debe coincidir con una categoria definida en app.js y con el data-category de los productos.
+            Ejemplo: href="#impresoras" muestra la seccion generada para data-category="impresoras".
+          -->
+          <a class="shop-category active" href="#catalogo">
+            <span>Todos los productos</span>
+            <strong>12</strong>
+          </a>
+          <a class="shop-category shop-category-offers" href="ofertas.html">
+            <span class="shop-category-icon" aria-hidden="true">%</span>
+            <span>Ofertas</span>
+            <strong>6</strong>
+          </a>
+          <a class="shop-category" href="#impresoras">
+            <img src="../Img/printer-icon.svg" alt="" aria-hidden="true" />
+            <span>Impresoras</span>
+            <strong>6</strong>
+          </a>
+          <div class="shop-subcategory-nav" aria-label="Subcategorias de impresoras">
+            <a href="#impresoras-simple-bn">Simple funcion B/N</a>
+            <a href="#impresoras-simple-color">Simple funcion color</a>
+            <a href="#impresoras-multi-bn">Multifuncional B/N</a>
+            <a href="#impresoras-multi-color">Multifuncional color</a>
+            <a href="#impresoras-termica-pos">Termicas POS</a>
+            <a href="#impresoras-termica-etiquetas">Termicas etiquetas</a>
+            <a href="#impresoras-carnetizadoras">Carnetizadoras</a>
+          </div>
+          <a class="shop-category" href="#computo">
+            <img src="../Img/laptop-icon.svg" alt="" aria-hidden="true" />
+            <span>Computo</span>
+            <strong>1</strong>
+          </a>
+          <a class="shop-category" href="#electronica">
+            <img src="../Img/electronic-icon.svg" alt="" aria-hidden="true" />
+            <span>Tecnologia y electronica</span>
+            <strong>2</strong>
+          </a>
+          <a class="shop-category" href="#audio-video">
+            <img src="../Img/audio&amp;video-icon.svg" alt="" aria-hidden="true" />
+            <span>Audio y video</span>
+            <strong>1</strong>
+          </a>
+          <a class="shop-category" href="#herramientas">
+            <img src="../Img/tools-icon.svg" alt="" aria-hidden="true" />
+            <span>Herramientas</span>
+            <strong>1</strong>
+          </a>
+          <a class="shop-category" href="#cables">
+            <img src="../Img/cables-icon.svg" alt="" aria-hidden="true" />
+            <span>Cables</span>
+            <strong>1</strong>
+          </a>
+        </aside>
+
+        <div class="shop-content">
+          <!-- Barra superior del catalogo. Los controles de orden/vista son visuales por ahora. -->
+          <div class="shop-toolbar" id="catalogo">
+            <p>Catalogo separado por categorias</p>
+            <div class="shop-controls">
+              <label>
+                <span>Ordenar por</span>
+                <select aria-label="Ordenar productos">
+                  <option>Mas vendidos</option>
+                  <option>Menor precio</option>
+                  <option>Mayor precio</option>
+                  <option>Recientes</option>
+                </select>
+              </label>
+              <button class="shop-view shop-grid-view active" type="button" aria-label="Vista en cuadricula">
+                <span></span><span></span><span></span><span></span>
+              </button>
+              <button class="shop-view shop-list-view" type="button" aria-label="Vista en lista">
+                <i></i><i></i><i></i>
+              </button>
+            </div>
+          </div>
+
+          <!--
+            AQUI SE AGREGAN PRODUCTOS NUEVOS.
+
+            Para crear un producto, copia un <article class="product-card shop-product-card"> completo
+            y cambia estos datos:
+            - data-category: categoria donde aparecera. Opciones actuales:
+              "impresoras", "computo", "electronica", "audio-video", "herramientas", "cables".
+            - data-subcategory: subcategoria opcional. En impresoras usamos:
+              "simple-bn", "simple-color", "multi-bn", "multi-color", "termica-pos",
+              "termica-etiquetas", "carnetizadoras".
+            - data-item: codigo unico del producto en el sistema interno. Cambialo por el ITEM real.
+            - data-product: palabras clave para el buscador y el carrito.
+            - product-badge: etiqueta opcional como Oferta, Nuevo o B2B. Puedes quitar ese <span>.
+            - shop-product-media + clase visual: imagen o dibujo del producto. Las clases estan en style.css.
+            - h3, price, rating: texto visible de la tarjeta.
+
+            app.js lee estos productos y los separa automaticamente en secciones por categoria.
+          -->
+          <div class="shop-products products-grid">
+            <!-- Producto de ejemplo: impresora de oficina dentro de la categoria Impresoras. -->
+            <article class="product-card shop-product-card" data-category="impresoras" data-subcategory="multi-color" data-item="ITEM-001" data-product="impresora multifuncional oficina empresarial alto volumen">
+              <span class="product-badge">Oferta</span>
+              <div class="shop-product-media shop-product-printer-office"></div>
+              <h3>Impresora Multifuncional Oficina</h3>
+              <p class="price">$1.899.900 <span>$2.199.900</span></p>
+              <p class="rating">***** <span>(128)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="impresoras" data-subcategory="simple-color" data-item="ITEM-002" data-product="impresora hogar tinta documentos tareas">
+              <span class="product-badge new">Nuevo</span>
+              <div class="shop-product-media shop-product-printer-home"></div>
+              <h3>Impresora para Hogar</h3>
+              <p class="price">$749.900</p>
+              <p class="rating">***** <span>(96)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="computo" data-item="ITEM-003" data-product="computador portatil hogar estudio trabajo">
+              <div class="shop-product-media shop-product-laptop"></div>
+              <h3>Computador Portatil Hogar</h3>
+              <p class="price">$2.499.900</p>
+              <p class="rating">***** <span>(74)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="electronica" data-item="ITEM-004" data-product="lector codigo barras qr huella punto de venta">
+              <div class="shop-product-media shop-product-reader"></div>
+              <h3>Lector Codigos, QR y Huellas</h3>
+              <p class="price">$399.900</p>
+              <p class="rating">***** <span>(210)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="impresoras" data-subcategory="termica-etiquetas" data-item="ITEM-005" data-product="impresora etiquetas codigo barras envios textil">
+              <span class="product-badge">Oferta</span>
+              <div class="shop-product-media shop-product-label"></div>
+              <h3>Impresora de Etiquetas</h3>
+              <p class="price">$689.900 <span>$849.900</span></p>
+              <p class="rating">***** <span>(156)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="impresoras" data-subcategory="simple-color" data-item="ITEM-006" data-product="kit tintas suministros impresion oficina">
+              <div class="shop-product-media shop-product-inks"></div>
+              <h3>Kit de Tintas Originales</h3>
+              <p class="price">$189.900</p>
+              <p class="rating">***** <span>(87)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="impresoras" data-subcategory="simple-bn" data-item="ITEM-007" data-product="toner laser impresora oficina">
+              <span class="product-badge new">Nuevo</span>
+              <div class="shop-product-media shop-product-toner"></div>
+              <h3>Toner Laser Alto Rendimiento</h3>
+              <p class="price">$299.900</p>
+              <p class="rating">***** <span>(43)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="audio-video" data-item="ITEM-008" data-product="audifonos parlante sonido audio video">
+              <div class="shop-product-media shop-product-audio"></div>
+              <h3>Audio para Oficina y Hogar</h3>
+              <p class="price">$169.900</p>
+              <p class="rating">***** <span>(34)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="cables" data-item="ITEM-009" data-product="cable usb hdmi red accesorios conectividad">
+              <div class="shop-product-media shop-product-cable"></div>
+              <h3>Cables y Accesorios</h3>
+              <p class="price">$29.900</p>
+              <p class="rating">***** <span>(112)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="herramientas" data-item="ITEM-010" data-product="herramientas tecnicas mantenimiento electronica">
+              <div class="shop-product-media shop-product-tools"></div>
+              <h3>Kit Herramientas Tecnicas</h3>
+              <p class="price">$219.900</p>
+              <p class="rating">***** <span>(98)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="electronica" data-item="ITEM-011" data-product="componentes modulos electronica sensor placa">
+              <div class="shop-product-media shop-product-board"></div>
+              <h3>Modulos Electronicos</h3>
+              <p class="price">$59.900</p>
+              <p class="rating">***** <span>(65)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+            <article class="product-card shop-product-card" data-category="impresoras" data-subcategory="multi-bn" data-item="ITEM-012" data-product="alquiler impresora renta mensual empresa">
+              <span class="product-badge">B2B</span>
+              <div class="shop-product-media shop-product-rent"></div>
+              <h3>Renta Mensual de Impresoras</h3>
+              <p class="price">Desde $120.000</p>
+              <p class="rating">***** <span>(71)</span></p>
+              <button class="add-cart" type="button">Agregar</button>
+            </article>
+          </div>
+
+          <nav class="shop-pagination" aria-label="Paginacion de productos">
+            <a class="active" href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#" aria-label="Siguiente">›</a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="info-strip shop-info-strip">
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="../Img/shipments-icon.svg" alt="" /></span>
+          <div>
+            <h4>Envio Gratis</h4>
+            <p>En compras desde $150.000</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="../Img/warranty-icon.svg" alt="" /></span>
+          <div>
+            <h4>Garantia Total</h4>
+            <p>12 meses de garantia</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="../Img/afterSale-icon.svg" alt="" /></span>
+          <div>
+            <h4>Soporte 24/7</h4>
+            <p>Estamos aqui para ayudarte</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="../Img/safety-icon.svg" alt="" /></span>
+          <div>
+            <h4>Pago Seguro</h4>
+            <p>Multiples metodos de pago</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="shop-newsletter">
+        <div>
+          <h2>Recibe nuestras ofertas y novedades</h2>
+          <p>Promociones, suministros y tecnologia para tu negocio.</p>
+        </div>
+        <form>
+          <input type="email" placeholder="Ingresa tu correo electronico" aria-label="Correo electronico" />
+          <button class="btn-primary" type="submit">Suscribirme</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-tab">Mas informacion</div>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Contactanos</h3>
+          <a href="tel:+573054829046">Ventas WhatsApp<br />(+57) 305 482 90 46</a>
+          <a href="mailto:ventas@unielectronica.com">ventas@unielectronica.com</a>
+          <span>Cali: San Nicolas</span>
+          <span>Bogota: Centro tecnologico/comercial</span>
+        </div>
+        <div class="footer-column">
+          <h3>Centro de ayuda</h3>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="#">Garantias y cambios</a>
+          <a href="#">Metodos de pago</a>
+        </div>
+        <div class="footer-column">
+          <h3>Soluciones</h3>
+          <a href="#">Impresoras</a>
+          <a href="#">Computo</a>
+          <a href="#">Audio y Video</a>
+          <a href="tienda.html#electronica">Tecnologia y electronica</a>
+          <a href="#">Herramientas</a>
+        </div>
+        <div class="footer-column">
+          <h3>Nuestra compania</h3>
+          <a href="nosotros.html">Quienes somos</a>
+          <a href="#">Ventas empresariales</a>
+          <a href="#">Soporte tecnico</a>
+          <a href="#">Puntos de entrega</a>
+        </div>
+        <div class="footer-column">
+          <h3>Informacion legal</h3>
+          <a href="#">Terminos y condiciones</a>
+          <a href="#">Politicas de privacidad</a>
+          <a href="#">Tratamiento de datos</a>
+          <a href="#">Politica de garantias</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Unielectronica</p>
+        <span>2026 Unielectronica. Tecnologia, impresion y soporte para clientes reales.</span>
+      </div>
+    </footer>
+
+    <a class="whatsapp-float" href="https://wa.me/573157001313" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+      <span>WhatsApp</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3.5a8.4 8.4 0 0 0-7.25 12.64L4 20.5l4.45-1.17A8.4 8.4 0 1 0 12 3.5Z"></path>
+        <path d="M8.8 8.2c.2-.42.42-.43.62-.43h.5c.16 0 .38.06.58.48.22.52.72 1.77.78 1.9.06.13.1.29.02.46-.08.18-.13.29-.27.45-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.68 1.12 1.46 1.8 1 .9 1.84 1.18 2.1 1.31.26.13.42.11.57-.06.16-.18.66-.77.84-1.04.18-.26.35-.22.59-.13.24.08 1.52.72 1.78.85.26.13.43.19.5.3.06.11.06.64-.15 1.25-.21.6-1.23 1.18-1.72 1.22-.44.04-1 .06-1.62-.1-.37-.1-.85-.28-1.46-.54-2.56-1.1-4.23-3.67-4.36-3.84-.13-.18-1.04-1.38-1.04-2.63 0-1.25.66-1.86.9-2.12Z"></path>
+      </svg>
+    </a>
+
+    <script src="../app.js"></script>
+  </body>
+</html>

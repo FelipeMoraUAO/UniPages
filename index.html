@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unielectronica | Tecnologia y accesorios</title>
+    <link rel="icon" type="image/png" href="Img/favicon-unielectronica.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Preloader inicial: se oculta desde app.js despues de 1 segundo. -->
+    <div class="preloader" id="preloader" aria-label="Cargando Unielectronica">
+      <div class="preloader-card">
+        <img src="Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Header fijo: logo, navegacion principal, buscador, carrito y menu movil. -->
+    <header class="site-header">
+      <div class="top-bar">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
+          <img class="brand-logo" src="Img/UNIELECTRONICA%20LOGO.png" alt="Unielectronica" />
+        </a>
+        <nav class="nav" id="mainNav">
+          <a href="#inicio" class="nav-link active">Inicio</a>
+          <a href="pages/tienda.html" class="nav-link">Tienda</a>
+          <a href="pages/ofertas.html" class="nav-link">Ofertas</a>
+          <a href="pages/nosotros.html" class="nav-link">Nosotros</a>
+          <a href="pages/contacto.html" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-icon icon-search" id="searchBtn" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21"></path>
+            </svg>
+          </button>
+          <button class="btn-icon cart-btn icon-cart" aria-label="Carrito">
+            <img src="Img/cart-icon.svg" alt="" aria-hidden="true" />
+            <span id="cartCount">0</span>
+          </button>
+          <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><span></span></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Panel de busqueda: app.js lo abre al hacer clic en el icono de lupa. -->
+    <div class="search-panel" id="searchPanel" aria-hidden="true">
+      <div class="search-box" role="search">
+        <label for="productSearch">Buscar en Unielectronica</label>
+        <div class="search-row">
+          <input id="productSearch" type="search" placeholder="Audifonos, smartwatch, gaming..." autocomplete="off" />
+          <button class="btn-primary" id="closeSearch" type="button">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- Hero principal con carrusel. Cada .hero-slide corresponde a una pantalla del carrusel. -->
+      <section class="hero hero-carousel" id="inicio" aria-label="Productos destacados">
+        <div class="carousel-track" id="heroTrack">
+          <div class="hero-slide active">
+            <div class="hero-text">
+              <p class="eyebrow">Impresion empresarial</p>
+              <h1>Impresoras para <span>tu oficina</span></h1>
+              <p class="hero-copy">Equipos rapidos, confiables y listos para alto volumen de trabajo.</p>
+              <div class="hero-actions">
+                <a href="https://wa.me/573157001313?text=Hola%2C%20quiero%20cotizar%20impresoras%20para%20oficina." class="btn-primary" target="_blank" rel="noopener">Cotizar ahora</a>
+                <a href="pages/tienda.html#impresoras" class="btn-ghost">Ver impresoras</a>
+              </div>
+            </div>
+            <div class="hero-media">
+              <div class="device-card">
+                <div class="hero-product-image hero-office-printer" aria-hidden="true"></div>
+                <div class="hero-feature-card feature-top">Alto volumen</div>
+                <div class="hero-feature-card feature-mid">Red y WiFi</div>
+                <div class="hero-feature-card feature-bottom">Soporte local</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-text">
+              <p class="eyebrow">Soluciones para casa</p>
+              <h1>Impresoras para <span>el hogar</span></h1>
+              <p class="hero-copy">Soluciones practicas para tareas, documentos y uso diario.</p>
+              <div class="hero-actions">
+                <a href="https://wa.me/573157001313?text=Hola%2C%20quiero%20cotizar%20impresoras%20para%20el%20hogar." class="btn-primary" target="_blank" rel="noopener">Cotizar ahora</a>
+                <a href="pages/tienda.html#impresoras" class="btn-ghost">Ver modelos</a>
+              </div>
+            </div>
+            <div class="hero-media">
+              <div class="device-card">
+                <div class="hero-product-image hero-home-printer" aria-hidden="true"></div>
+                <div class="hero-feature-card feature-top">Uso diario</div>
+                <div class="hero-feature-card feature-mid">Bajo consumo</div>
+                <div class="hero-feature-card feature-bottom">Facil instalacion</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-text">
+              <p class="eyebrow">Computo personal</p>
+              <h1>Computadores para <span>el hogar</span></h1>
+              <p class="hero-copy">Equipos ideales para estudio, trabajo, navegacion y entretenimiento.</p>
+              <div class="hero-actions">
+                <a href="https://wa.me/573157001313?text=Hola%2C%20quiero%20cotizar%20computadores%20para%20el%20hogar%20o%20trabajo." class="btn-primary" target="_blank" rel="noopener">Cotizar ahora</a>
+                <a href="pages/tienda.html#computo" class="btn-ghost">Ver computadores</a>
+              </div>
+            </div>
+            <div class="hero-media">
+              <div class="device-card">
+                <div class="hero-product-image hero-computer" aria-hidden="true"></div>
+                <div class="hero-feature-card feature-top">Trabajo y estudio</div>
+                <div class="hero-feature-card feature-mid">Listos para usar</div>
+                <div class="hero-feature-card feature-bottom">Asesoria tecnica</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-text">
+              <p class="eyebrow">Puntos de venta</p>
+              <h1>Lectores de codigos, <span>QR y huellas</span></h1>
+              <p class="hero-copy">Lectores para negocios, inventarios, puntos de venta y control de acceso.</p>
+              <div class="hero-actions">
+                <a href="https://wa.me/573157001313?text=Hola%2C%20quiero%20cotizar%20lectores%20de%20codigos%2C%20QR%20o%20huellas." class="btn-primary" target="_blank" rel="noopener">Cotizar ahora</a>
+                <a href="pages/tienda.html#electronica" class="btn-ghost">Ver lectores</a>
+              </div>
+            </div>
+            <div class="hero-media">
+              <div class="device-card">
+                <div class="hero-product-image hero-readers" aria-hidden="true"></div>
+                <div class="hero-feature-card feature-top">Codigos y QR</div>
+                <div class="hero-feature-card feature-mid">Inventarios</div>
+                <div class="hero-feature-card feature-bottom">Control de acceso</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-text">
+              <p class="eyebrow">Etiquetado profesional</p>
+              <h1>Impresoras de <span>etiquetas</span></h1>
+              <p class="hero-copy">Soluciones para codigos de barras, productos, envios e industria textil.</p>
+              <div class="hero-actions">
+                <a href="https://wa.me/573157001313?text=Hola%2C%20quiero%20cotizar%20impresoras%20de%20etiquetas." class="btn-primary" target="_blank" rel="noopener">Cotizar ahora</a>
+                <a href="pages/tienda.html#impresoras-termica-etiquetas" class="btn-ghost">Ver etiquetas</a>
+              </div>
+            </div>
+            <div class="hero-media">
+              <div class="device-card">
+                <div class="hero-product-image hero-label-printer" aria-hidden="true"></div>
+                <div class="hero-feature-card feature-top">Codigos de barras</div>
+                <div class="hero-feature-card feature-mid">Envios y productos</div>
+                <div class="hero-feature-card feature-bottom">Textil e industria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-prev" id="prevSlide" type="button" aria-label="Anterior">
+          <img src="Img/slide2-icon.svg" alt="" aria-hidden="true" />
+        </button>
+        <button class="carousel-btn carousel-next" id="nextSlide" type="button" aria-label="Siguiente">
+          <img src="Img/slide1-icon.svg" alt="" aria-hidden="true" />
+        </button>
+        <div class="carousel-dots" aria-label="Seleccionar slide">
+          <button class="carousel-dot active" type="button" aria-label="Slide 1"></button>
+          <button class="carousel-dot" type="button" aria-label="Slide 2"></button>
+          <button class="carousel-dot" type="button" aria-label="Slide 3"></button>
+          <button class="carousel-dot" type="button" aria-label="Slide 4"></button>
+          <button class="carousel-dot" type="button" aria-label="Slide 5"></button>
+        </div>
+      </section>
+
+      <!-- Categorias destacadas del home. Los enlaces pueden llevar a tienda.html o a una categoria concreta. -->
+      <section class="categories-section" id="categorias">
+        <div class="categories-heading">
+          <p>Todo en tecnologia, impresion y mas</p>
+          <h2>Explora nuestras <span>categorias</span></h2>
+          <p>Encuentra los mejores productos y soluciones tecnologicas para tu hogar, negocio u oficina.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card feature-black category-printers">
+            <img class="category-icon category-icon-light" src="Img/printer-icon.svg" alt="" aria-hidden="true" />
+            <div class="feature-copy">
+              <p class="feature-label">Equipos y suministros</p>
+              <h3>Impresoras</h3>
+              <a href="pages/tienda.html#impresoras" class="feature-btn">Explorar</a>
+            </div>
+            <div class="category-visual printer-visual" aria-hidden="true"></div>
+          </article>
+          <article class="feature-card feature-yellow category-computing">
+            <img class="category-icon" src="Img/laptop-icon.svg" alt="" aria-hidden="true" />
+            <div class="feature-copy">
+              <p class="feature-label">Portatiles y escritorio</p>
+              <h3>Computo</h3>
+              <a href="pages/tienda.html#computo" class="feature-btn light">Explorar</a>
+            </div>
+            <div class="category-visual laptop-visual" aria-hidden="true"></div>
+          </article>
+          <article class="feature-card feature-red category-audio">
+            <img class="category-icon category-icon-light" src="Img/audio&amp;video-icon.svg" alt="" aria-hidden="true" />
+            <div class="feature-copy">
+              <p class="feature-label">Sonido e imagen</p>
+              <h3>Audio y Video</h3>
+              <a href="pages/tienda.html#audio-video" class="feature-btn light red-text">Explorar</a>
+            </div>
+            <div class="category-visual audio-visual" aria-hidden="true"></div>
+          </article>
+          <article class="feature-card feature-white category-electronics">
+            <img class="category-icon" src="Img/electronic-icon.svg" alt="" aria-hidden="true" />
+            <div class="feature-copy">
+              <p class="feature-label">Componentes y modulos</p>
+              <h3>Tecnologia y electronica</h3>
+              <a href="pages/tienda.html#electronica" class="feature-btn">Explorar</a>
+            </div>
+            <div class="category-visual board-visual" aria-hidden="true"></div>
+          </article>
+          <article class="feature-card feature-green category-tools">
+            <img class="category-icon category-icon-light" src="Img/tools-icon.svg" alt="" aria-hidden="true" />
+            <div class="feature-copy">
+              <p class="feature-label">Trabajo tecnico</p>
+              <h3>Herramientas</h3>
+              <a href="pages/tienda.html#herramientas" class="feature-btn light">Explorar</a>
+            </div>
+            <div class="category-visual tools-visual" aria-hidden="true"></div>
+          </article>
+          <article class="feature-card feature-blue category-cables">
+            <img class="category-icon" src="Img/cables-icon.svg" alt="" aria-hidden="true" />
+            <div class="feature-copy">
+              <p class="feature-label">Conectividad</p>
+              <h3>Cables y Accesorios</h3>
+              <a href="pages/tienda.html#cables" class="feature-btn light">Explorar</a>
+            </div>
+            <div class="category-visual cables-visual" aria-hidden="true"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Beneficios rápidos de compra/servicio. -->
+      <section class="info-strip">
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="Img/shipments-icon.svg" alt="" /></span>
+          <div>
+            <h4>Envio Gratis</h4>
+            <p>En compras desde $150.000</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="Img/warranty-icon.svg" alt="" /></span>
+          <div>
+            <h4>Garantia Total</h4>
+            <p>12 meses de garantia en todos los productos</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="Img/afterSale-icon.svg" alt="" /></span>
+          <div>
+            <h4>Soporte 24/7</h4>
+            <p>Estamos aqui para ayudarte</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="Img/safety-icon.svg" alt="" /></span>
+          <div>
+            <h4>Pago Seguro</h4>
+            <p>Multiples metodos de pago</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon" aria-hidden="true"><img src="Img/quality-icon.svg" alt="" /></span>
+          <div>
+            <h4>Calidad Garantizada</h4>
+            <p>Productos originales y certificados</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Banner promocional del home. Para ofertas completas se usa pages/ofertas.html. -->
+      <section class="promo-banner" id="ofertas">
+        <div class="promo-copy">
+          <p class="promo-small">20% de descuento</p>
+          <h2>Tecnologia sin limites</h2>
+          <p>15 Mayo al 7 Junio</p>
+        </div>
+        <div class="promo-hero">
+          <div class="device-image device-image-2"></div>
+        </div>
+        <div class="promo-details">
+          <span class="promo-tag">Unielectronica</span>
+          <h3>Ofertas de Verano</h3>
+          <p>Aprovecha descuentos exclusivos en cientos de productos.</p>
+          <a href="#tienda" class="btn-secondary">Comprar Ahora</a>
+        </div>
+      </section>
+
+      <!-- Productos destacados del home. La tienda completa esta en pages/tienda.html. -->
+      <section class="best-sellers" id="tienda">
+        <div class="section-header">
+          <h2>Productos Mas Vendidos</h2>
+          <p>Descubre lo que nuestros clientes eligen</p>
+        </div>
+        <div class="products-grid">
+          <article class="product-card" data-product="audifonos inalambricos audio bluetooth">
+            <div class="product-image product-image-1"></div>
+            <h3>Audifonos Inalambricos</h3>
+            <p>$129.900</p>
+            <p class="rating">*****</p>
+            <button class="add-cart" type="button">Agregar</button>
+          </article>
+          <article class="product-card" data-product="smartwatch pro reloj inteligente wearables">
+            <div class="product-image product-image-2"></div>
+            <h3>Smartwatch Pro</h3>
+            <p>$159.900</p>
+            <p class="rating">*****</p>
+            <button class="add-cart" type="button">Agregar</button>
+          </article>
+          <article class="product-card" data-product="laptop ultra computador portatil trabajo estudio">
+            <div class="product-image product-image-3"></div>
+            <h3>Laptop Ultra 14"</h3>
+            <p>$2.499.900</p>
+            <p class="rating">*****</p>
+            <button class="add-cart" type="button">Agregar</button>
+          </article>
+          <article class="product-card" data-product="control gamer pro gaming consola">
+            <div class="product-image product-image-4"></div>
+            <h3>Control Gamer Pro</h3>
+            <p>$189.900</p>
+            <p class="rating">*****</p>
+            <button class="add-cart" type="button">Agregar</button>
+          </article>
+          <article class="product-card" data-product="parlante bluetooth audio portatil">
+            <div class="product-image product-image-5"></div>
+            <h3>Parlante Bluetooth</h3>
+            <p>$89.900</p>
+            <p class="rating">*****</p>
+            <button class="add-cart" type="button">Agregar</button>
+          </article>
+        </div>
+      </section>
+
+      <!-- Resumen corto de la empresa en home. La pagina completa esta en pages/nosotros.html. -->
+      <section class="blog-preview" id="nosotros">
+        <div class="section-header">
+          <h2>Nosotros</h2>
+          <p>Tecnologia, impresion y soporte con atencion cercana</p>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <span>Trayectoria</span>
+            <h3>Mas de 15 anos acompanando hogares y empresas</h3>
+            <p>Somos una empresa colombiana del sector tecnologico con presencia en Cali y Bogota.</p>
+          </article>
+          <article class="blog-card">
+            <span>Soluciones</span>
+            <h3>Venta, alquiler y suministros de impresion</h3>
+            <p>Atendemos necesidades de oficina, comercio, empresas y usuarios que buscan tecnologia confiable.</p>
+          </article>
+          <article class="blog-card">
+            <span>Atencion</span>
+            <h3>Asesoria practica para comprar mejor</h3>
+            <p>Te orientamos segun presupuesto, uso, disponibilidad y soporte para que tomes una buena decision.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Formulario rapido del home. La pagina completa de contacto esta en pages/contacto.html. -->
+      <section class="contact-section" id="contacto">
+        <div>
+          <p class="eyebrow">Atencion personalizada</p>
+          <h2>Necesitas ayuda para elegir</h2>
+          <p>Escribenos y te orientamos segun tu presupuesto, uso y equipo actual.</p>
+        </div>
+        <form class="contact-form">
+          <input type="text" placeholder="Nombre" aria-label="Nombre" />
+          <input type="email" placeholder="Correo" aria-label="Correo" />
+          <textarea placeholder="Cuentanos que estas buscando" aria-label="Mensaje"></textarea>
+          <button class="btn-primary" type="submit">Enviar mensaje</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer compartido del home: enlaces, datos de contacto e informacion legal. -->
+    <footer class="site-footer">
+      <div class="footer-tab">Mas informacion</div>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Contactanos</h3>
+          <a href="tel:+573054829046">Ventas WhatsApp<br />(+57) 305 482 90 46</a>
+          <a href="tel:+573052615442">Servicio al cliente<br />(+57) 305 261 54 42</a>
+          <a href="mailto:ventas@unielectronica.com">ventas@unielectronica.com</a>
+          <span>Horario: lunes a sabado</span>
+        </div>
+        <div class="footer-column">
+          <h3>Centro de ayuda</h3>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="pages/contacto.html">Contacto</a>
+          <a href="#">Garantias y cambios</a>
+          <a href="#">Metodos de pago</a>
+          <a href="#">Envios nacionales</a>
+        </div>
+        <div class="footer-column">
+          <h3>Soluciones</h3>
+          <a href="#tienda">Impresoras</a>
+          <a href="#tienda">Computo</a>
+          <a href="#tienda">Audio y Video</a>
+          <a href="pages/tienda.html#electronica">Tecnologia y electronica</a>
+          <a href="#tienda">Herramientas</a>
+          <a href="#tienda">Cables y accesorios</a>
+        </div>
+        <div class="footer-column">
+          <h3>Nuestra compania</h3>
+          <a href="pages/nosotros.html">Quienes somos</a>
+          <a href="#">Ventas empresariales</a>
+          <a href="#">Soporte tecnico</a>
+          <a href="#">Puntos de entrega</a>
+          <a href="#">Trabaja con nosotros</a>
+        </div>
+        <div class="footer-column">
+          <h3>Informacion legal</h3>
+          <a href="#">Terminos y condiciones</a>
+          <a href="#">Politicas de privacidad</a>
+          <a href="#">Tratamiento de datos</a>
+          <a href="#">Derecho de retracto</a>
+          <a href="#">Politica de garantias</a>
+        </div>
+      </div>
+      <div class="brand-strip" aria-label="Marcas disponibles">
+        <span>Marcas que manejamos</span>
+        <div class="brand-list">
+          <span>HP</span>
+          <span>Epson</span>
+          <span>Canon</span>
+          <span>Brother</span>
+          <span>Lenovo</span>
+          <span>Dell</span>
+          <span>ASUS</span>
+          <span>Acer</span>
+          <span>Logitech</span>
+          <span>Samsung</span>
+          <span>Kingston</span>
+          <span>Steren</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Unielectronica</p>
+        <span>2026 Unielectronica. Tecnologia, accesorios y soporte para tu vida digital.</span>
+      </div>
+    </footer>
+
+    <!-- Boton flotante de WhatsApp visible en todo el home. -->
+    <a class="whatsapp-float" href="https://wa.me/573157001313" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+      <span>WhatsApp</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3.5a8.4 8.4 0 0 0-7.25 12.64L4 20.5l4.45-1.17A8.4 8.4 0 1 0 12 3.5Z"></path>
+        <path d="M8.8 8.2c.2-.42.42-.43.62-.43h.5c.16 0 .38.06.58.48.22.52.72 1.77.78 1.9.06.13.1.29.02.46-.08.18-.13.29-.27.45-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.68 1.12 1.46 1.8 1 .9 1.84 1.18 2.1 1.31.26.13.42.11.57-.06.16-.18.66-.77.84-1.04.18-.26.35-.22.59-.13.24.08 1.52.72 1.78.85.26.13.43.19.5.3.06.11.06.64-.15 1.25-.21.6-1.23 1.18-1.72 1.22-.44.04-1 .06-1.62-.1-.37-.1-.85-.28-1.46-.54-2.56-1.1-4.23-3.67-4.36-3.84-.13-.18-1.04-1.38-1.04-2.63 0-1.25.66-1.86.9-2.12Z"></path>
+      </svg>
+    </a>
+
+    <script src="app.js"></script>
+  </body>
+</html>
