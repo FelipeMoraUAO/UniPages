@@ -22,7 +22,6 @@ const offerSlides = document.querySelectorAll('.offer-slide');
 const offerDots = document.querySelectorAll('.offers-dots .carousel-dot');
 const prevOffer = document.getElementById('prevOffer');
 const nextOffer = document.getElementById('nextOffer');
-const PRELOADER_MIN_TIME = 1000;
 const CART_STORAGE_KEY = 'unielectronicaCart';
 const WHATSAPP_NUMBER = '573157001313';
 
@@ -180,17 +179,12 @@ function hidePreloader() {
   preloader?.classList.add('is-hidden');
 }
 
-// Preloader: solo se muestra completo la primera vez de la sesion.
+// Preloader: se oculta cuando la pagina termina de cargar, sin espera artificial.
 if (preloader) {
-  if (sessionStorage.getItem('unielectronicaPreloaderShown') === 'true') {
+  if (document.readyState === 'complete') {
     hidePreloader();
   } else {
-    window.addEventListener('load', () => {
-      window.setTimeout(() => {
-        hidePreloader();
-        sessionStorage.setItem('unielectronicaPreloaderShown', 'true');
-      }, PRELOADER_MIN_TIME);
-    });
+    window.addEventListener('load', hidePreloader, { once: true });
   }
 }
 
