@@ -24,6 +24,8 @@ const prevOffer = document.getElementById('prevOffer');
 const nextOffer = document.getElementById('nextOffer');
 const CART_STORAGE_KEY = 'unielectronicaCart';
 const WHATSAPP_NUMBER = '573157001313';
+const EXCEL_PRODUCTS_PATH = window.location.pathname.includes('/pages/') ? '../base_datos_productos.xls' : 'base_datos_productos.xls';
+const IS_IN_PAGES = window.location.pathname.includes('/pages/');
 
 // Datos ampliados para la pagina de detalle de producto.
 // La clave debe coincidir con data-product en pages/tienda.html.
@@ -157,6 +159,233 @@ const PRODUCT_DETAILS = {
   },
 };
 
+function getRootRelativePath(path) {
+  if (!path) return '';
+  if (/^(https?:)?\/\//.test(path) || path.startsWith('data:')) return path;
+  const cleanPath = path.replace(/^(\.\/|\.\.\/)+/, '');
+  return IS_IN_PAGES ? `../${cleanPath}` : cleanPath;
+}
+
+function getDefaultProductImage(product) {
+  if (product.imagen) return product.imagen;
+  if (product.subcategoria === 'termica-etiquetas') return 'Img/impresorasEtiquetas.png';
+  if (product.subcategoria === 'simple-color') return 'Img/impresorasHogar.png';
+  return 'Img/impresorasOficina.png';
+}
+
+function getCategoryLabel(category) {
+  const labels = {
+    impresoras: 'Impresoras',
+    computo: 'Computo',
+    electronica: 'Tecnologia y electronica',
+    'audio-video': 'Audio y video',
+    herramientas: 'Herramientas',
+    cables: 'Cables',
+  };
+
+  return labels[category] || category || 'Producto';
+}
+
+function getExcelProductId(product) {
+  return product.keywords || `${product.item || product.nombre} ${product.nombre}`.toLowerCase();
+}
+
+function formatProductPrice(value) {
+  const cleanValue = String(value || '').replace(/[^\d]/g, '');
+  if (!cleanValue) return 'Consultar precio';
+  return formatPrice(Number(cleanValue));
+}
+
+function normalizeExcelHeader(header) {
+  const cleanHeader = header
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_|_$/g, '');
+
+  const aliases = {
+    codigo_item: 'item',
+    nombre_del_producto: 'nombre',
+    categoria: 'categoria',
+    subcategoria: 'subcategoria',
+    precio_actual: 'precio',
+    precio_anterior_opcional: 'precio_anterior',
+    precio_anterior: 'precio_anterior',
+    etiqueta_visible: 'estado',
+    ruta_de_imagen: 'imagen',
+    texto_alt_imagen: 'alt_imagen',
+    texto_alternativo_imagen: 'alt_imagen',
+    descripcion_corta: 'descripcion_corta',
+    descripcion_completa: 'descripcion_larga',
+    caracteristicas_principales: 'caracteristicas',
+    caracteristica_1: 'caracteristica_1',
+    caracteristica_2: 'caracteristica_2',
+    caracteristica_3: 'caracteristica_3',
+    caracteristica_4: 'caracteristica_4',
+    palabras_clave_busqueda: 'keywords',
+    palabras_clave: 'keywords',
+  };
+
+  return aliases[cleanHeader] || cleanHeader;
+}
+
+function getXmlChildrenByName(element, name) {
+  return Array.from(element.children).filter((child) => child.localName === name);
+}
+
+function getExcelCellText(cell) {
+  const data = getXmlChildrenByName(cell, 'Data')[0];
+  return data?.textContent.trim() || '';
+}
+
+function getExcelRowValues(row) {
+  const values = [];
+  let position = 1;
+
+  getXmlChildrenByName(row, 'Cell').forEach((cell) => {
+    const index = cell.getAttribute('ss:Index') || cell.getAttributeNS('urn:schemas-microsoft-com:office:spreadsheet', 'Index');
+    if (index) position = Number(index);
+    values[position - 1] = getExcelCellText(cell);
+    position += 1;
+  });
+
+  return values;
+}
+
+function parseProductsExcelXml(text) {
+  const xml = new DOMParser().parseFromString(text, 'application/xml');
+  if (xml.querySelector('parsererror')) return [];
+
+  const rows = Array.from(xml.getElementsByTagName('*')).filter((element) => element.localName === 'Row');
+  if (rows.length < 2) return [];
+
+  const headers = getExcelRowValues(rows[0]).map((header) => normalizeExcelHeader(header));
+  return rows.slice(1).map((row, index) => {
+    const values = getExcelRowValues(row);
+    return headers.reduce((product, header, index) => {
+      product[header] = values[index] || product[header] || '';
+      return product;
+    }, { item: `AUTO-${String(index + 1).padStart(3, '0')}` });
+  }).filter((product) => product.item && product.nombre);
+}
+
+function productToDetail(product) {
+  const id = getExcelProductId(product);
+  const imageUrl = getRootRelativePath(getDefaultProductImage(product));
+  const featureList = product.caracteristicas
+    ? product.caracteristicas.split(/[;|]/).map((feature) => feature.trim()).filter(Boolean)
+    : [product.caracteristica_1, product.caracteristica_2, product.caracteristica_3, product.caracteristica_4].filter(Boolean);
+
+  return {
+    item: product.item,
+    category: getCategoryLabel(product.categoria),
+    title: product.nombre,
+    priceText: formatProductPrice(product.precio),
+    oldPrice: formatProductPrice(product.precio_anterior) === 'Consultar precio' ? '' : formatProductPrice(product.precio_anterior),
+    badge: product.estado,
+    imageClass: 'shop-product-dynamic',
+    imageUrl,
+    summary: product.descripcion_corta || product.alt_imagen || product.nombre,
+    description: product.descripcion_larga || product.descripcion_corta || product.nombre,
+    features: featureList.length > 0 ? featureList : ['Consulta disponibilidad', 'Asesoria segun necesidad', 'Soporte local'],
+    id,
+  };
+}
+
+function registerExcelProducts(products) {
+  products.forEach((product) => {
+    const detail = productToDetail(product);
+    PRODUCT_DETAILS[detail.id] = detail;
+  });
+}
+
+function createExcelProductCard(product) {
+  const detail = productToDetail(product);
+  const card = document.createElement('article');
+  card.className = 'product-card shop-product-card';
+  card.dataset.category = product.categoria || 'impresoras';
+  if (product.subcategoria) card.dataset.subcategory = product.subcategoria;
+  card.dataset.item = product.item;
+  card.dataset.product = detail.id;
+  card.dataset.imageUrl = detail.imageUrl;
+
+  const oldPrice = detail.oldPrice ? ` <span>${detail.oldPrice}</span>` : '';
+  const badgeClass = /nuevo/i.test(product.estado) ? ' new' : '';
+  const badge = product.estado ? `<span class="product-badge${badgeClass}">${product.estado}</span>` : '';
+
+  card.innerHTML = `
+    ${badge}
+    <div class="shop-product-media shop-product-dynamic" style="background-image: url('${detail.imageUrl}'), radial-gradient(circle at 25% 82%, rgba(240, 229, 13, 0.22), transparent 38%), radial-gradient(circle at 82% 30%, rgba(255, 0, 0, 0.12), transparent 34%);" aria-label="${product.alt_imagen || product.nombre}"></div>
+    <h3>${product.nombre}</h3>
+    <p class="price">${detail.priceText}${oldPrice}</p>
+    <p class="rating">***** <span>(Disponible)</span></p>
+    <button class="add-cart" type="button">Agregar</button>
+  `;
+
+  return card;
+}
+
+async function loadExcelProducts() {
+  try {
+    const response = await fetch(EXCEL_PRODUCTS_PATH);
+    if (!response.ok) throw new Error(`No se pudo cargar ${EXCEL_PRODUCTS_PATH}`);
+    const products = parseProductsExcelXml(await response.text());
+    registerExcelProducts(products);
+    return products;
+  } catch (error) {
+    console.warn(error);
+    return [];
+  }
+}
+
+function updateShopSidebarCounts() {
+  const shopPage = document.querySelector('.shop-page');
+  if (!shopPage) return;
+
+  const cards = Array.from(document.querySelectorAll('.shop-product-card'));
+  const countByCategory = cards.reduce((counts, card) => {
+    const category = card.dataset.category;
+    counts[category] = (counts[category] || 0) + 1;
+    counts.total += 1;
+    return counts;
+  }, { total: 0 });
+
+  document.querySelectorAll('.shop-sidebar .shop-category').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const count = link.querySelector('strong');
+    if (!count || href.endsWith('ofertas.html')) return;
+
+    const category = href.replace('#', '');
+    count.textContent = category === 'catalogo' ? countByCategory.total : countByCategory[category] || 0;
+  });
+}
+
+function showCatalogLoadMessage(message) {
+  const toolbar = document.querySelector('.shop-toolbar > p');
+  if (toolbar) toolbar.textContent = message;
+}
+
+async function loadExcelProductsIntoShop() {
+  const productGrid = document.querySelector('.shop-content > .shop-products');
+  if (!productGrid) return;
+
+  const products = await loadExcelProducts();
+  if (products.length === 0) {
+    showCatalogLoadMessage('Catalogo separado por categorias');
+    return;
+  }
+
+  productGrid.innerHTML = '';
+  products.forEach((product) => productGrid.appendChild(createExcelProductCard(product)));
+  showCatalogLoadMessage(`Catalogo cargado desde base de datos: ${products.length} productos`);
+}
+
+async function loadExcelProductsForDetail() {
+  if (!document.querySelector('.product-detail-page')) return;
+  await loadExcelProducts();
+}
+
 // Estado compartido: carrito guardado, slide actual y temporizadores de carruseles.
 let cart = loadCart();
 let currentSlide = 0;
@@ -286,8 +515,6 @@ function groupShopProductsByCategory() {
   productGrid.replaceWith(fragment);
 }
 
-groupShopProductsByCategory();
-
 // TIENDA: agrega un boton directo de WhatsApp a cada producto.
 // Este boton salta el carrito y envia solo el producto seleccionado.
 function addDirectBuyButtons() {
@@ -306,23 +533,10 @@ function addDirectBuyButtons() {
   });
 }
 
-addDirectBuyButtons();
-
-// TIENDA: muestra el codigo ITEM visible en cada tarjeta para vendedores.
+// TIENDA: mantiene el ITEM interno, pero no lo muestra en las tarjetas.
 function addProductItemLabels() {
-  document.querySelectorAll('.shop-page .shop-product-card').forEach((card) => {
-    if (card.querySelector('.product-item-code')) return;
-
-    const item = card.dataset.item || 'Sin ITEM';
-    const title = card.querySelector('h3');
-    const label = document.createElement('p');
-    label.className = 'product-item-code';
-    label.textContent = `ITEM: ${item}`;
-    title?.insertAdjacentElement('afterend', label);
-  });
+  document.querySelectorAll('.shop-page .product-item-code').forEach((label) => label.remove());
 }
-
-addProductItemLabels();
 
 // TIENDA: al hacer clic en una tarjeta, abre la pagina de detalle del producto.
 // Los botones internos quedan excluidos para que "Agregar" y "Comprar" sigan funcionando normal.
@@ -348,8 +562,6 @@ function enableProductDetailLinks() {
     });
   });
 }
-
-enableProductDetailLinks();
 
 // PAGINA PRODUCTO: pinta la informacion ampliada segun el parametro ?producto=...
 function renderProductDetailPage() {
@@ -385,17 +597,21 @@ function renderProductDetailPage() {
   title.textContent = product.title;
   document.title = `${product.title} | Unielectronica`;
   category.textContent = product.category;
-  item.textContent = `ITEM: ${product.item}`;
+  item.textContent = '';
+  item.hidden = true;
   price.textContent = product.priceText;
   oldPrice.textContent = product.oldPrice || '';
   oldPrice.hidden = !product.oldPrice;
   summary.textContent = product.summary;
   description.textContent = product.description;
   mainImage.className = `shop-product-media ${product.imageClass}`;
+  mainImage.style.backgroundImage = product.imageUrl
+    ? `url('${product.imageUrl}'), radial-gradient(circle at 25% 82%, rgba(240, 229, 13, 0.22), transparent 38%), radial-gradient(circle at 82% 30%, rgba(255, 0, 0, 0.12), transparent 34%)`
+    : '';
   features.innerHTML = product.features.map((feature) => `<li>${feature}</li>`).join('');
   gallery.innerHTML = [1, 2, 3].map((item) => `
     <button class="product-detail-thumb${item === 1 ? ' active' : ''}" type="button" aria-label="Imagen ${item} de ${product.title}">
-      <span class="shop-product-media ${product.imageClass}" aria-hidden="true"></span>
+      <span class="shop-product-media ${product.imageClass}" style="${product.imageUrl ? `background-image: url('${product.imageUrl}'), radial-gradient(circle at 25% 82%, rgba(240, 229, 13, 0.22), transparent 38%), radial-gradient(circle at 82% 30%, rgba(255, 0, 0, 0.12), transparent 34%);` : ''}" aria-hidden="true"></span>
     </button>
   `).join('');
   gallery.querySelectorAll('.product-detail-thumb').forEach((thumb) => {
@@ -412,6 +628,7 @@ function renderProductDetailPage() {
     priceText: product.priceText,
     price: parsePrice(product.priceText),
     imageClass: product.imageClass,
+    imageUrl: product.imageUrl,
   };
   const message = encodeURIComponent(`Hola, quiero comprar o cotizar este producto:\n\n- ${product.title}\nITEM: ${product.item}\nPrecio: ${product.priceText}`);
 
@@ -429,7 +646,18 @@ function renderProductDetailPage() {
   }
 }
 
-renderProductDetailPage();
+async function initProductCatalog() {
+  await loadExcelProductsIntoShop();
+  await loadExcelProductsForDetail();
+  groupShopProductsByCategory();
+  updateShopSidebarCounts();
+  addDirectBuyButtons();
+  addProductItemLabels();
+  enableProductDetailLinks();
+  renderProductDetailPage();
+}
+
+initProductCatalog();
 
 // Menu responsive: abre/cierra el menu en pantallas pequenas.
 menuBtn?.addEventListener('click', () => {
@@ -469,7 +697,7 @@ closeSearch?.addEventListener('click', () => {
 productSearch?.addEventListener('input', (event) => {
   const query = event.target.value.trim().toLowerCase();
 
-  productCards.forEach((card) => {
+  document.querySelectorAll('.product-card').forEach((card) => {
     const productText = `${card.textContent} ${card.dataset.product}`.toLowerCase();
     card.classList.toggle('is-hidden', query !== '' && !productText.includes(query));
   });
@@ -520,6 +748,7 @@ function getProductInfo(card) {
     priceText,
     price: parsePrice(priceText),
     imageClass,
+    imageUrl: card.dataset.imageUrl || '',
   };
 }
 
@@ -615,10 +844,9 @@ function renderCart() {
 
   cartItemsContainer.innerHTML = cart.map((item) => `
     <article class="cart-item" data-cart-id="${item.id}">
-      <div class="cart-item-image ${item.imageClass}" aria-hidden="true"></div>
+      <div class="cart-item-image ${item.imageClass}" style="${item.imageUrl ? `background-image: url('${item.imageUrl}'), radial-gradient(circle at 25% 82%, rgba(240, 229, 13, 0.22), transparent 38%), radial-gradient(circle at 82% 30%, rgba(255, 0, 0, 0.12), transparent 34%);` : ''}" aria-hidden="true"></div>
       <div class="cart-item-info">
         <h3>${item.title}</h3>
-        <span class="cart-item-code">ITEM: ${item.item || 'Sin ITEM'}</span>
         <p>${item.priceText}</p>
         <div class="cart-item-actions">
           <button type="button" data-cart-action="decrease" aria-label="Restar ${item.title}">-</button>
@@ -665,19 +893,20 @@ function updateCartItem(id, action) {
 }
 
 // Botones "Agregar" de cada producto.
-cartButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const card = button.closest('.product-card');
-    if (!card) return;
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('.add-cart');
+  if (!button) return;
 
-    addToCart(getProductInfo(card));
-    button.textContent = 'Agregado';
-    openCart();
+  const card = button.closest('.product-card');
+  if (!card) return;
 
-    setTimeout(() => {
-      button.textContent = 'Agregar';
-    }, 1200);
-  });
+  addToCart(getProductInfo(card));
+  button.textContent = 'Agregado';
+  openCart();
+
+  setTimeout(() => {
+    button.textContent = 'Agregar';
+  }, 1200);
 });
 
 // Boton de carrito del header.

@@ -2107,10 +2107,11 @@ main {
 }
 
 .shop-product-card .price {
-  margin: 0 0 8px;
-  color: var(--black);
-  font-size: 1.06rem;
+  margin: 2px 0 12px;
+  color: var(--red);
+  font-size: 1.18rem;
   font-weight: 950;
+  line-height: 1.2;
 }
 
 .shop-product-card .price span {
